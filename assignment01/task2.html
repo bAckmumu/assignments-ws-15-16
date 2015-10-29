@@ -1,0 +1,118 @@
+<!DOCTYPE html> 
+<html lang="de">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Task 2</title>
+</head>
+
+<body>
+
+<canvas id="redCanvas" 
+		width="50" height="50"
+		style="border: 1px solid gray">
+</canvas>
+
+<canvas id="greenCanvas" 
+		width="50" height="50"
+		style="border: 1px solid gray">
+</canvas>
+
+<canvas id="blueCanvas" 
+		width="50" height="50"
+		style="border: 1px solid gray"
+		background>
+</canvas>
+
+<button id="clearButton">Clear</button> 
+
+<br/>
+
+<canvas id="maincanvas" 
+		width="800" height="600"
+		style="border: 1px solid gray">
+</canvas> 
+
+
+<script>
+	var canvas = document.getElementById('maincanvas');
+	var context = canvas.getContext('2d');
+
+	var selectedColor = 'black';
+	var isPainting = false;
+	
+
+	function eventPaint(event) {
+		if ( isPainting ) {
+			var x = event.clientX - canvas.offsetLeft;
+			var y = event.clientY - canvas.offsetTop;
+			
+			var radius = 5; 
+			
+			context.beginPath();
+			context.fillStyle = selectedColor;
+			context.arc(x,y,radius,0,2*Math.PI); 
+			context.fill();
+		}
+	}
+
+	function eventMouseDown(event) {
+		isPainting = true;
+	}
+
+	function eventMouseUp(event) {
+		isPainting = false;
+	}
+
+
+
+	function selectColor(event) {
+		clearSelection();
+
+		var canvas = event.target;
+		selectedColor = canvas.style.background;
+
+		canvas.style.border = '3px solid #90C3D4';
+	}
+
+	function clearSelection() {
+		document.getElementById('redCanvas').style.border = '1px solid gray';
+		document.getElementById('greenCanvas').style.border = '1px solid gray';
+		document.getElementById('blueCanvas').style.border = '1px solid gray';
+	}
+
+
+
+	function setCanvasColor(id, color) {
+		document.getElementById(id).style.background = color;
+	}
+
+	function contendLoad() {
+		setCanvasColor('redCanvas', 'red');
+		setCanvasColor('greenCanvas', 'green');
+		setCanvasColor('blueCanvas', 'blue');
+	}
+
+
+
+	document.addEventListener('DOMContentLoaded', contendLoad);
+	
+	document.getElementById('redCanvas').onclick = selectColor;
+	document.getElementById('greenCanvas').onclick = selectColor;
+	document.getElementById('blueCanvas').onclick = selectColor;
+
+	document.getElementById('maincanvas').addEventListener('mousedown', eventMouseDown);
+	document.getElementById('maincanvas').addEventListener('mouseup', eventMouseUp);
+	document.getElementById('maincanvas').addEventListener('mousemove', eventPaint);
+	
+	// bind event handler to clear button
+     document.getElementById('clearButton').addEventListener('click', function() {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      }, false);
+
+
+</script>
+
+</body>
+
+</html>

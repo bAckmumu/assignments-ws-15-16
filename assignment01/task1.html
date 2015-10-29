@@ -1,0 +1,141 @@
+<!DOCTYPE html> 
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Task 1</title>
+</head>
+<body>
+
+<canvas id="starCanvas" width="200" height="200" style="border:1px solid #d3d3d3;">
+	Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<canvas id="diamondCanvas" width="200" height="200" style="border:1px solid #d3d3d3;">
+	Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<canvas id="heartCanvas" width="200" height="200" style="border:1px solid #d3d3d3;">
+	Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<canvas id="questionCanvas" width="200" height="200" style="border:1px solid #d3d3d3;">
+	Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+
+<script>
+
+//http://stackoverflow.com/questions/14580033/algorithm-for-drawing-a-5-point-star
+function drawStar() {
+	var c = document.getElementById("starCanvas");
+	var canvasCtx = c.getContext("2d");
+
+
+	var alpha = (2 * Math.PI) / 10; 
+	var radius = 50;
+	var starXY = [100,100]
+
+	canvasCtx.beginPath();
+
+	for(var i = 11; i != 0; i--)
+	{
+	    var r = radius*(i % 2 + 1)/2;
+	    var omega = alpha * i;
+	    canvasCtx.lineTo((r * Math.sin(omega)) + starXY[0], (r * Math.cos(omega)) + starXY[1]);
+	}
+	canvasCtx.closePath();
+	canvasCtx.fillStyle = "yellow";
+	canvasCtx.fill();
+}
+
+
+//http://www.onlywebpro.com/2011/07/02/html5-canvas-for-absolute-beginners-part-2/
+function drawDiamond() {
+    var myCanvas = document.getElementById("diamondCanvas");
+    var ctx = myCanvas.getContext("2d");
+     
+    //Begin our drawing
+    ctx.beginPath();
+    ctx.moveTo(100,150);
+    ctx.lineTo(50,75);
+    ctx.lineTo(75,50);
+    ctx.lineTo(125,50);
+    ctx.lineTo(150,75);
+     
+    //Define the style of the shape
+    ctx.lineWidth = 1;
+    ctx.fillStyle = "rgb(102, 204, 0)";
+    ctx.strokeStyle = "rgb(0, 50, 200)";
+     
+    //Close the path
+    ctx.closePath();
+     
+    //Fill the path with ourline and color
+    ctx.fill();
+    ctx.stroke();
+         
+}
+
+//https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes
+function drawHeart() {
+  var canvas = document.getElementById("heartCanvas");
+  if (canvas.getContext){
+    var ctx = canvas.getContext('2d');
+
+    // Quadratric curves example
+    ctx.beginPath();
+    ctx.fillStyle = "#E81C1C";
+    ctx.moveTo(75,40);
+    ctx.bezierCurveTo(75,37,70,25,50,25);
+    ctx.bezierCurveTo(20,25,20,62.5,20,62.5);
+    ctx.bezierCurveTo(20,80,40,102,75,120);
+    ctx.bezierCurveTo(110,102,130,80,130,62.5);
+    ctx.bezierCurveTo(130,62.5,130,25,100,25);
+    ctx.bezierCurveTo(85,25,75,37,75,40);
+    ctx.fill();
+  }
+}
+
+
+function drawQuestionMark() {
+  var canvas = document.getElementById("questionCanvas");
+  if (canvas.getContext){
+    var ctx = canvas.getContext('2d');
+
+    // Quadratric curves example
+    ctx.beginPath();
+    ctx.moveTo(75,40);
+    ctx.bezierCurveTo(75,37,85,25,100,25);
+    ctx.bezierCurveTo(130,25,130,62.5,130,62.5);
+    ctx.bezierCurveTo(130,80,110,102,100,100);
+    ctx.lineTo(100,125);
+
+    //Define the style of the shape
+    ctx.lineWidth = 10;
+    ctx.strokeStyle = "#21409E";
+    
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.fillStyle = "#21409E";
+    ctx.arc(100,140,7,0,2*Math.PI); 
+    ctx.fill();
+  }
+}
+
+function drawAllShapes() {
+	drawStar();
+	drawDiamond();
+	drawHeart();
+	drawQuestionMark();
+}
+
+document.addEventListener("DOMContentLoaded", drawAllShapes);
+
+</script>
+
+
+</body>
+
+</html>
