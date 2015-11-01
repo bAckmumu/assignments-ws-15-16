@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>Waht's wrong here?</title>
+</head>
+<body>
+
+<?php
+function loginUser($email,$password) {
+    return true;
+}
+
+if($_POST['submit']) {
+    loginUser($_POST['email'],$_POST['password']);
+}
+else{ ?>
+<form>
+    <label>
+        Email: <input type="email">
+    </label>
+    <label>
+        Password: <input type="password">
+    </label>
+    <input type="submit" />
+</form>
+<?php } ?>
+</body>
+</html>
