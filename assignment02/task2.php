@@ -15,32 +15,41 @@
 			  	
 			  	$words = explode(" ", $text);
 			  	
-			  	for ($i=0; $i < count($words); $i++) { 
-			  		$word = $words[i];
+			  	for ($i=0; $i<count($words);$i++) { 
+			  		$word = $words[$i];
 
 			  		if (strlen($word) < 4 ) {
 			  			continue;
 			  		}
 
-			  		$words[i] = shuffleWord($word);
+					//echo "$word".$i."= ";
+					//echo $word;
+					//echo "<br>";
+
+			  		$words[$i] = shuffleWord($word);
 			  	}
 
 			  	return implode(" ",$words);
 			};
 
 			function shuffleWord($word){
-				$rest = substr($word, 2, -1);
-				shuffle($rest);
+				$rest = substr($word, 1, -1);
+				
+				$numbers = str_split($rest);
+				//echo "$numbers= ";
+				//echo $numbers;
+				//echo "<br>";
+				shuffle($numbers);
 
-				return $word[0] . $rest . $word[count($word - 1)];
+				return substr($word, 0, 1).implode($numbers).substr($word, -1);
 			};
 
-			echo "fib($shuffleinput) = ";
+			echo "shuffleText($shuffleinput) = ";
 			echo shuffleText($shuffleinput);
 			echo "<br>";
     	?>
     	<br>
-    	<a href="fibonacci2a.html">New computation</a>
+    	<a href="task2.html">New computation</a>
 	</h2>
 </body>
 </html>
