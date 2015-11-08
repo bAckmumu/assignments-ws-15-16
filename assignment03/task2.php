@@ -1,7 +1,5 @@
 
-<!--
-	Task 2: Codebreaker
--->
+<!-- Task 2: Codebreaker -->
 <?php session_start(); ?>
 
 <!DOCTYPE HTML> 
@@ -16,18 +14,19 @@
 
 <?php
 // define variables and set to empty values
-$letterErr = "";
-$gameOver ="";
-$letter0 = $letter1 = $letter2 = $letter3 = "";
+//$letterErr = "";
+//$gameOver ="";
+$letter0 = "";
 $letters = array("A","B","C","D","E","F","G");
 
-if( isset($_SESSION['guesses'])) {
-	if( count($_SESSION['guesses']) > 10 ) { 
-		session_destroy();
-		$_SESSION = array();
+// destroy session when game lost or won
+if( isset($_SESSION['gameover'])) {
+	session_destroy();
+	$_SESSION = array();
+}
 
-		$gameOver ="GAME OVER!";
-	}
+if(!isset($_SESSION['colors'])){
+	$_SESSION['colors'] = array( "red" => 0, "black" => 1, "white" => 2 ); 
 }
 
 if(!isset($_SESSION['secretCode'])){
@@ -38,95 +37,141 @@ if(!isset($_SESSION['guesses'])){
 	$_SESSION['guesses'] = array(); 
 }
 
- 
+// process post 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$temp = test_input($_POST["letter0"]);
+	$guessedCode = getPostInput();	
 
-	$guessedCode = str_split( strtoupper( substr($temp, 0, 4) ) );
+	$colors = checkGuessedCode( $guessedCode );
 
-	$_SESSION['guesses'][] = $guessedCode;
+	// add newest guesse to session
+	$_SESSION['guesses'][$guessedCode] = $colors;
+	
+	checkIsGameOver();
 
-	//if (empty($_POST["letter0"]) 
-   	//|| empty($_POST["letter1"]) 
-   	//|| empty($_POST["letter2"]) 
-   	//|| empty($_POST["letter3"]) ) {
-   	//	$letterErr = "All four text fields need one letter as input";
-	//} else {
-    //	$letter0 = test_input($_POST["letter0"]);
-    //	// check if letter0 only contains letters and whitespace
-    //	if (!preg_match("/^[a-zA-Z ]*$/",$letter0)) {
-    //		$firstnameErr = "Only letters and white space allowed"; 
-    //	}
-   	//}
-      
+	checkIsGameWon($colors);
  }
 
+
+function getPostInput() {
+	$guessedCode = testInput($_POST["letter0"]);
+
+	while ( strlen($guessedCode) < 4) {
+		$guessedCode = $guessedCode."?";
+	}
+
+	$guessedCode = substr($guessedCode, 0, 4);
+
+	$guessedCode = strtoupper( $guessedCode );
+
+	return $guessedCode;	
+}
+
+function checkGuessedCode($guessedCode) {
+	$data = str_split($guessedCode);
+
+	$colors = array();
+	for ($i=0; $i < 4; $i++) { 
+		for ($j=0; $j < 4; $j++) { 
+			if ($data[$i] == $_SESSION['secretCode'][$j] && $i == $j) {
+				$colors[$i] = $_SESSION["colors"]["red"];
+				break;
+			}
+			elseif ($data[$i] == $_SESSION['secretCode'][$j] && $i != $j) {
+				$colors[$i] = $_SESSION["colors"]["black"];
+				break;
+			}
+			else {
+				$colors[$i] = $_SESSION["colors"]["white"];
+			}
+		}
+	}
+
+	return $colors;
+}
+
+function buildTrsHtml() {
+	$tr = "";
+
+	foreach ($_SESSION['guesses'] as $key => $value) {
+		$tr = $tr . "<tr>" . buildTdHtml($key, $value) . "</tr>";
+	}
+
+	return $tr;
+}
+
+function buildTdHtml($guesse, $colors) {
+	$redHtml = '<img src="images/red.jpg" alt="letters is part of the code and also at the correct position" height="32" width="32">';
+	$blackHtml = '<img src="images/black.jpg" alt="letters is part of the code but not at the correct position" height="32" width="32">';
+	$whiteHtml = '<img src="images/white.jpg" alt="letter is not part of the code" height="32" width="32">';
+
+	$td = "";
+
+	foreach (str_split($guesse) as $value) {
+		$td = $td."<td>".$value."</td>";
+	}
+
+	foreach ($colors as $value) {
+		$html;
+		
+		if ($value ==  $_SESSION["colors"]["red"] ) {
+			$html = $redHtml;
+		}
+		elseif ($value == $_SESSION["colors"]["black"] ) {
+			$html = $blackHtml;
+		}
+		else {
+			$html = $whiteHtml;
+		}
+
+		$td = $td."<td>".$html."</td>";
+	}
+
+	return $td;
+}
+
 function initSecretCode() {
+	// todo generate random code  
 	$secretCode = array("A","B","C","D");
 
 	return $secretCode;
 }
 
-function test_input($data) {
+function testInput($data) {
    $data = trim($data);
    $data = stripslashes($data);
    $data = htmlspecialchars($data);
    return $data;
 }
 
-function getTrs() {
-	$tr = "";
-
-	foreach ($_SESSION['guesses'] as $value) {
-		$tr = $tr . "<tr>" . getTd($value) . "</tr>";
+function checkIsGameOver() {
+	if( count($_SESSION['guesses']) >= 10 ) { 
+		$_SESSION['gameover'] = "GAME OVER!";
 	}
-
-	return $tr;
 }
 
-function getTd($data) {
-	$td = "";
-
-	foreach ($data as $value) {
-		$td = $td."<td>".$value."</td>";
-	}
-
-	$colors = checkGuessedCode($data);
+function checkIsGameWon($colors) {
+	$isWon = true;
+	
 	foreach ($colors as $value) {
-		$td = $td."<td>".$value."</td>";
-	}
-
-	return $td;
-}
-
-function checkGuessedCode($data) {
-	$red = '<img src="images/red.jpg" alt="letters is part of the code and also at the correct position" height="32" width="32">';
-	$black = '<img src="images/black.jpg" alt="letters is part of the code but not at the correct position" height="32" width="32">';
-	$white = '<img src="images/white.jpg" alt="letter is not part of the code" height="32" width="32">';
-
-	$colors = array();
-	for ($i=0; $i < 4; $i++) { 
-		for ($j=0; $j < 4; $j++) { 
-			if ($data[i] == $_SESSION['secretCode'][j] && i == j) {
-				$colors[i] = $red;
-				break;
-			}
-			elseif ($data[i] == $_SESSION['secretCode'][j] && i != j) {
-				$colors[i] = $black;
-				break;
-			}
-			else {
-				$colors[i] = $white;
-			}
+		if ( $value != $_SESSION["colors"]["red"] ) {
+			$isWon = false;
 		}
 	}
 
-	return $colors;
+	if ($isWon) {
+		$_SESSION['gameover'] = "You broke the code and won the game!";
+	}
+}
 
 function debugInfo() {
-	$rows = '';
-	foreach ($_SESSION['guesses'] as $value) {
-		$rows = $rows . ' | ' . implode(' ', $value);
+	$rows = "";
+	foreach ($_SESSION["guesses"] as $key => $value) {
+		$rows = $rows ." | Key: ". $key ." Value: ";
+
+		foreach ($value as $temp) {
+			$rows = $rows . $temp;
+		}
+
 	}
 
 	return $rows;	
@@ -144,22 +189,34 @@ function debugInfo() {
 			<li>A white dot indicates that a letter is not part of the code.</li>
 		</ul>
 	</p>
-
+	
 	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" > 
 		<input type="text" name="letter0" value="<?php echo $letter0;?>">
 		<!--<input type="text" name="letter1" value="<?php echo $letter1;?>">
 		<input type="text" name="letter2" value="<?php echo $letter2;?>">
 		<input type="text" name="letter3" value="<?php echo $letter3;?>">-->
 		<input type="submit" name="submit" value="Submit">
+		<!--<span class="error"><?php echo $letterErr;?></span>-->
 	</form>
+
+	<?php 
+	if (isset($_SESSION['gameover'])) {
+		echo '<h1 class="error">'. $_SESSION['gameover'] .'</h1>';
+	}
+	?>
+	
 	<br>
-	<span class="error"><?php echo $letterErr;?></span>
-	<br><br>
-	<h1 class="error"><?php echo $gameOver;?></h1>
-	<br><br>
 	<table>
-		<?php echo getTrs(); ?>		
+		<?php echo buildTrsHtml(); ?>		
 	</table>
-	<p class="error" >	Debug: <?php echo debugInfo();?></p>
+	
+	<!-- uncommand to get debug infos -->
+	<!--<br><br>
+	<p class="error" >	Debug: <br> 
+	<?php
+		echo "Guesse count: ". count($_SESSION['guesses']) ."<br>";
+		echo "Guesses: ". debugInfo();
+	?>
+	</p>-->
 </body>
 </html>
