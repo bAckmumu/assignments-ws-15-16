@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script language="JavaScript" type="text/javascript" src="js/cookiewarning2.js"></script>
+
+<h1>Assignment 3 (HF, major subject)</h1>
+Due: Mon 09.11.2015; 12:00h (1 Week)
+<h2>Goals</h2>
+After doing these exercises,
+<ul>
+	<li>You will know how to use cookies and inform the users about them</li>
+	<li>You can utilize sessions to persist data and make web apps stateful</li>
+</ul>
+
+<h2>Task 1: Cookie Box</h2>
+Online Multimedia WS 2015/2016
+ As you have heard in the tutorial, web site operators are required to inform the users about the use of cookies.
+Create a re-usable “cookie-box” that displays a disclaimer at the bottom of the screen (fixed). It says that the user accepts cookies unless manually turning it off for this website. It then goes away if:
+<ul>
+	<li>The user hits an “X”-button in the top-right corner of the box.</li>
+	<li>The user performs at least three clicks on the site.</li>
+	<li>Scrolls to the bottom of the document.</li>
+</ul>
+The box should not reappear after any of the above has occurred. However, if the user leaves the site within a 10 second time frame, no cookie is stored in the browser.
+The purpose of this box is to use it in any project of yours that relies on cookies. Complete this task with JavaScript and/or PHP.
+Optional:
+<ul>
+	<li>Movements attract attention. Use CSS3 animations to make the cookie-box slide up from the bottom.</li>
+</ul>
+Put your solution in the folder ‘task1’.
+
+<h2>Task 2: Codebreaker</h2>
+This is a quite work-intensive task, so you might want to start early during the week.
+You are asked to create a game where the player has to guess a four-letter code. The code is formed of a random combination of the letters A, B, C, D, E, F, or G. Every letter can only appear once in it. The player enters his or her guess into a form and receives a hint until they found out the code. The hint has the following semantics:
+<ul>
+	<li>A red dot indicates that one of the guessed letters is part of the code and also at the correct position.</li>
+	<li>A black dot indicates that one of the guessed letters is part of the code but not at the correct position</li>
+	<li>A white dot indicates that a letter is not part of the code.</li>
+</ul>
+Example: The code is EBFD here. If the player enters these guesses (on the left), the web page
+should display the corresponding hints (colored dots):
+Consider these requirements:
+<ul>
+	<li>Use PHP and sessions to keep track of all the attempts.</li>
+	<li>Create a random four-letter code from the alphabet { A, B, C, D, E, F, G } when the user
+	starts the game (i.e. visits the site for the first time).</li>
+	<li>The user can guess at most ten times. If the code is incorrect then, the game is lost and the
+	code is revealed to the player.</li>
+	<li>The hints are presented as four colored dots. You can use regular image files for this.</li>
+	<li>All previous guesses are displayed.</li>
+	<li>The player can restart the game.</li>
+</ul>
+Optional:
+<ul>
+	<li>Sanity-check the player’s input. For example: do not count a guess if it contains a letter twice or a letter from outside the limited alphabet.</li>
+	<li>Show a leaderboard after the game is finished. The player can enter their name and save it. Use cookies for this.</li>
+</ul>
+Remember, you write code humans – not for machines. Make sure to comment your code as much as reasonable.
+Put your solution in the folder ‘task2’.
+  
+<h2>Task 3: Cookie Theft</h2>
+<p>Explain in your own words what cookie theft is, how it is done and which countermeasures exist. Provide links to your sources.</p>
+<p>Put your solution in the folder ‘task3’.</p>
+
+<h2>Task 4: Propose a task for the future or for the exam</h2>
+Take into consideration what this week’s lecture and tutorials are about and propose a task for this assignment sheet in future runs of this course. Also, if you want to, you can propose a task for the final exam. We reserve the right to actually use it. You are welcome to do this with every assignment this year.
+Put your proposition in the folder ‘task4’.
+
+<h2>Submission</h2>
+Please turn in your solution via UniWorX. You can form groups of up to three people.
+
+</body>
+</html>
