@@ -33,32 +33,32 @@ $authHandler = new AuthHandler($dbHandler);
         $authHandler->logoutUser();
     }
 
-    // ADD NOTE
-    // check if the user has submitted a new note:
-    if (isset($_POST['submitNote'])) {
-        if (isset($_POST['title']) && isset($_POST['content'])) {
+    // // ADD NOTE
+    // // check if the user has submitted a new note:
+    // if (isset($_POST['submitNote'])) {
+    //     if (isset($_POST['title']) && isset($_POST['content'])) {
 
-            if ($dbHandler->insertNote($_POST['title'], $_POST['content'], $authHandler->getUserId())) {
-                echo "<div class='notification success'>Successfully added note!</div>";
-            } else {
-                echo "<div class='notification error'>Oops! There was an error while saving your note.</div>";
-            }
-        }
-    }
+    //         if ($dbHandler->insertNote($_POST['title'], $_POST['content'], $authHandler->getUserId())) {
+    //             echo "<div class='notification success'>Successfully added note!</div>";
+    //         } else {
+    //             echo "<div class='notification error'>Oops! There was an error while saving your note.</div>";
+    //         }
+    //     }
+    // }
 
 
-    // DELETE NOTES
-    if (isset($_POST['submitDelete']) && isset($_POST['delete'])) {
-        $notesToDelete = array();
-        foreach($_POST['delete'] as $noteId){
-            $notesToDelete[] = $noteId;
-        }
-        if($dbHandler->deleteNotes($notesToDelete)){
-            echo "<div class='notification success'>Successfully deleted notes.</div>";
-        }else{
-            echo "<div class='notification error'>Sorry, we couldn't delete those notes. </div>";
-        }
-    }
+    // // DELETE NOTES
+    // if (isset($_POST['submitDelete']) && isset($_POST['delete'])) {
+    //     $notesToDelete = array();
+    //     foreach($_POST['delete'] as $noteId){
+    //         $notesToDelete[] = $noteId;
+    //     }
+    //     if($dbHandler->deleteNotes($notesToDelete)){
+    //         echo "<div class='notification success'>Successfully deleted notes.</div>";
+    //     }else{
+    //         echo "<div class='notification error'>Sorry, we couldn't delete those notes. </div>";
+    //     }
+    // }
     // ================================================================================================================
 
     echo "<div class='brand'>Notes</div>";
@@ -104,6 +104,8 @@ $authHandler = new AuthHandler($dbHandler);
             }
             ?>
 </div>
+
+<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 <script>
     (function(){
         var checkedItemCount = 0;
@@ -127,6 +129,36 @@ $authHandler = new AuthHandler($dbHandler);
             }
         }
     })();
+
+    function showNotification(response) {
+        var header = $(".header");
+
+        if( response.status == "OK" ) {
+            header.append("<div class='notification success'>"+response.message+"</div>");
+        }
+        else {
+            header.append("<div class='notification error'>"+response.message+"</div>");
+        }
+    }
+
+    $(document).ready(function() {
+        $('.note').submit(function(event) { 
+            var self = $(this);
+            var data = self.serialize();
+            event.preventDefault();
+            // ajax request on next slide!
+
+            $.ajax({
+                url: 'submitNote.php', 
+                type: 'POST',
+                data: data,
+                success: function(response) {
+                    response = (response instanceof String) ? $.parseJSON(response) : response;
+                    showNotification(response);
+                }
+            });
+        }); 
+    });
 
 </script>
 </body>
