@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('DBHandler.php');
 require_once('AuthHandler.php');
 require_once('connectionInfo.private.php');

@@ -81,28 +81,28 @@ $authHandler = new AuthHandler($dbHandler);
     echo "<section class='input'>";
     include_once('note.form.inc.php');
     echo "</section>"; ?>
+    
     <form method='post' >
         <input type="submit" name="submitDelete" value="Delete selected notes" class="deleteNotesButton" />
         <div class="clear"></div>
     <section class='notes'>
         <div class="flexParent">
-            <?php
-            $notes = $dbHandler->getNotesForUser($authHandler->getUserId());
-            foreach ($notes as $note) {
-                echo "<div class='note flexChild'><input type='checkbox' value='$note->id' name='delete[]'><div class='title'>$note->title</div><div class='content'>$note->content</div></div>";
-            }
-            echo "<div class='clear'></div>";
-            echo "</div>"; // flexparent
-            echo "</section>"; // notes
-            echo "</form>"; // delete form
-            } else {
-                echo "</header>";
-                echo "<div id='container'>";
-                include_once('login.form.inc.php');
-                echo "<div><a href='registration.php'>Register</a></div>";
-                echo "</div>"; // container;
-            }
-            ?>
+       
+        <div class='clear'></div>";
+        </div>"; // flexparent
+    </section>"; // notes
+    </form>"; // delete form
+    
+    <?php
+    } 
+    else {
+        echo "</header>";
+        echo "<div id='container'>";
+        include_once('login.form.inc.php');
+        echo "<div><a href='registration.php'>Register</a></div>";
+        echo "</div>"; // container;
+    }
+    ?>
 </div>
 
 <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -141,23 +141,61 @@ $authHandler = new AuthHandler($dbHandler);
         }
     }
 
-    $(document).ready(function() {
-        $('.note').submit(function(event) { 
-            var self = $(this);
-            var data = self.serialize();
-            event.preventDefault();
-            // ajax request on next slide!
+    function showNotes(response) {
+        
 
-            $.ajax({
-                url: 'submitNote.php', 
-                type: 'POST',
-                data: data,
-                success: function(response) {
-                    response = (response instanceof String) ? $.parseJSON(response) : response;
-                    showNotification(response);
-                }
-            });
-        }); 
+        $notes = $dbHandler->getNotesForUser($authHandler->getUserId());
+        
+        ea
+
+        foreach ($notes as $note) {
+            echo "<div class='note flexChild'><input type='checkbox' value='$note->id' name='delete[]'><div class='title'>$note->title</div><div class='content'>$note->content</div></div>";
+        }
+        echo "<div class='clear'></div>";
+        echo "</div>"; // flexparent
+        echo "</section>"; // notes
+        echo "</form>"; // delete form
+    }
+
+    function loadNotes() {
+        $.ajax({
+            url: 'loadNotes.php', 
+            type: 'POST',
+            data: '',
+            success: function(response) {
+                response = (response instanceof String) ? $.parseJSON(response) : response;
+                showNotes(response);
+            }
+        });
+    }
+
+    function submitNote(event) {
+        var self = $(this);
+        var data = self.serialize();
+        event.preventDefault();
+        
+        // ajax request
+        $.ajax({
+            url: 'submitNote.php', 
+            type: 'POST',
+            data: data,
+            success: function(response) {
+                response = (response instanceof String) ? $.parseJSON(response) : response;
+                showNotification(response);
+                loadNotes();
+            }
+        });
+    }
+
+    function deleteNote(event) {
+
+    }
+
+    $(document).ready(function() {
+        $('.note').submit(submitNote);
+        $('.deleteNotesButton').submit(deleteNote);
+
+        loadNotes();
     });
 
 </script>
