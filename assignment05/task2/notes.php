@@ -88,10 +88,10 @@ $authHandler = new AuthHandler($dbHandler);
     <section class='notes'>
         <div class="flexParent">
        
-        <div class='clear'></div>";
-        </div>"; // flexparent
-    </section>"; // notes
-    </form>"; // delete form
+            <div class='clear'></div>
+        </div>
+    </section>
+    </form>
     
     <?php
     } 
@@ -142,19 +142,21 @@ $authHandler = new AuthHandler($dbHandler);
     }
 
     function showNotes(response) {
+        $.each( response.notes, function( key, value ) {
+            alert( key + ": " + value );
+        });        
+
+        //$notes = $dbHandler->getNotesForUser($authHandler->getUserId());
+        
         
 
-        $notes = $dbHandler->getNotesForUser($authHandler->getUserId());
-        
-        ea
-
-        foreach ($notes as $note) {
-            echo "<div class='note flexChild'><input type='checkbox' value='$note->id' name='delete[]'><div class='title'>$note->title</div><div class='content'>$note->content</div></div>";
-        }
-        echo "<div class='clear'></div>";
-        echo "</div>"; // flexparent
-        echo "</section>"; // notes
-        echo "</form>"; // delete form
+        //foreach ($notes as $note) {
+        //    echo "<div class='note flexChild'><input type='checkbox' value='$note->id' name='delete[]'><div class='title'>$note->title</div><div class='content'>$note->content</div></div>";
+        //}
+        //echo "<div class='clear'></div>";
+        //echo "</div>"; // flexparent
+        //echo "</section>"; // notes
+        //echo "</form>"; // delete form
     }
 
     function loadNotes() {
@@ -182,7 +184,7 @@ $authHandler = new AuthHandler($dbHandler);
             success: function(response) {
                 response = (response instanceof String) ? $.parseJSON(response) : response;
                 showNotification(response);
-                loadNotes();
+                //loadNotes();
             }
         });
     }
