@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-// TODO include the shoot module and create a route for it.
+var shoot = require('./shoot');
+
+router.use('/shoot', shoot);
 
 
 module.exports = router;
