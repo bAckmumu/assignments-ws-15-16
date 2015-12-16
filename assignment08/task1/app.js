@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/screenshots', express.static(path.join(__dirname, 'screenshots')));
+
 app.use('/', routes);
 
 // catch 404 and forward to error handler
