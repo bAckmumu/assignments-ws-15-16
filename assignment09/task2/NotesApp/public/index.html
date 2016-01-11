@@ -270,7 +270,7 @@
                     // the response should contain a field 'inserted' that contains all the notes that were
                     // stored in the database
                     // !!! for now we only use the first one
-                    var insertedData = data.inserted ? data.inserted[0] : {};
+                    var insertedData = data.inserted ? data.inserted : {}; //data.inserted ? data.inserted[0] : {};
 
                     // in case an error occurred, let's inform the user
                     if(data.status == 'error'){

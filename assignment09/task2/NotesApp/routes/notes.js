@@ -6,7 +6,7 @@ var router = express.Router();
 
 
 // connect to a local database. We assume that we do not need a user name / password
-var db = require('monk')('localhost/mmn');
+var db = require('monk')('localhost/mmn-hartmann');
 
 // this collection holds our notes
 var notesCollection = db.get('notes');
@@ -25,15 +25,32 @@ router.get('/', function (req, res) {
     // 1. query the database using the notesCollection
     // 2. respond to the client with a JSON object
     /*
-         The response should look like this in case of success:
-         {
+        The response should look like this in case of success:
+        {
             status : 'success',
             message : 'fetched notes',
             notes : ... // array containing the fetched notes.
-         }
+        }
 
-         In case of an error, adjust the response accordingly. The status and message fields are mandatory.
-     */
+        In case of an error, adjust the response accordingly. The status and message fields are mandatory.
+    */
+
+    notesCollection.find({}, function(err, docs){
+        if(!err){
+            res.json({
+                status : 'success',
+                message : 'fetched notes',
+                notes : docs
+            });
+        }
+        else{
+            res.json({
+                status: 'error',
+                code: 1002,
+                message: 'There was an error loading the data' 
+            });
+        }
+    });
 });
 
 
@@ -58,7 +75,29 @@ router.post('/insert', function (req, res) {
             }
 
             In case of an error, adjust the response accordingly. The status and message fields are mandatory.
-         */
+        */
+
+        notes = req.body.notes;
+
+        //notesCollection.insert({ name: 'Tobi', bigdata: {} });
+
+        notesCollection.insert({ title: notes.title, content: notes.content}, function (err, doc) {
+            if(!err){
+                    console.log(doc);
+                    res.json({
+                        status : 'success',
+                        message : 'successfully inserted the note(s)',
+                        inserted : doc // array containing the inserted notes.
+                    });
+                }
+                else{
+                    res.json({
+                        status: 'error',
+                        code: 1002,
+                        message: 'There was an error inserting the data' 
+                    });
+                }
+        });
     }
     // either the body-parser failed or the parameter "notes" is missing in the request.
     else {
