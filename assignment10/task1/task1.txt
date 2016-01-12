@@ -1,0 +1,24 @@
+Assignment 10
+
+Task 1: Mash-Ups
+Many services on the web can be considered “mash-ups”. Every site that uses content from more than one remote service and displays that content on a single page is basically a mashup.
+
+Find three sites that you think are mashups and briefly describe
+a) the content sources
+b) the topic of the site
+c) how many XMLHttpRequests are made when the site loads for the first time. Put all queries / statements in a .txt file and put it into the folder ‘task1’.
+I don't know what you want me to do to answers the point c).
+
+hackpad.com
+https://manuelhartmann.hackpad.com/Passwrter-NXt4G9vZHOo
+a) user generated content, video sites (youtube, vimeo), pictures
+b) cooperative text editor
+c) I don't know what you want me to do to answers the point c).
+
+facebook.com
+a) user generated content, nearly every other site in the internet
+b) social network
+
+tumblr.com
+a) user generated content, nearly every other site in the internet
+b) micro blogging
