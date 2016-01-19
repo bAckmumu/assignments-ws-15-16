@@ -1,0 +1,62 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+##### Example
+
+    <x-testpolymer></x-testpolymer>
+
+@element x-testpolymer
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module name="x-testpolymer">
+  <link rel="import" type="css" href="x-testpolymer.css">
+  <template>
+    <div id="title">{{title}}</div>
+    <div id="contentwrapper">
+      <content></content>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'x-testpolymer',
+
+      /**
+       * The `noevent` event is not actually fired from here,
+       * we document it as an example of documenting events.
+       *
+       * @event noevent
+       */
+
+      properties: {
+        /**
+         * The `attr` attribute does not yet have a purpose.
+         */
+        attr: {
+          type: String,
+          value: '',
+          observe: '_attrChanged'
+        }
+      },
+
+      ready: function() {
+      },
+
+      /**
+       * This function will be invoked every time `attr` gets changed.
+       */
+      _attrChanged: function() {
+      },
+
+      /**
+       * The `task` method does [...]
+       *
+       * @param {String} dummy Defines [...].
+       * @return {Object} Returns [...].
+       */
+      task: function(dummy) {
+      }
+    });
+  </script>
+</dom-module>
