@@ -1,0 +1,99 @@
+/**/
+p {
+    text-align: justify;
+    text-indent: 1.5em
+    }
+p.center, p.dropcap {
+    text-indent: 0
+    }
+h1, h2 {
+    text-align: center;
+    clear: both;
+    margin-top: 0;
+    font-weight: normal
+    }
+h1 {
+    font-size: x-large
+    }
+h2 {
+    margin: 4em auto 1.5em auto
+    }
+.gesperrt {
+    letter-spacing: 0.2em;
+    margin-right: -0.2em
+    }
+.center {
+    text-align: center
+    }
+a[title].pagenum:after {
+    content: attr(title);
+    border: 1px solid silver;
+    display: inline;
+    font-size: x-small;
+    text-align: right;
+    color: #808080;
+    background-color: inherit;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-indent: 0;
+    letter-spacing: 0
+    }
+p.dropcap:first-letter {
+    clear: left;
+    margin: 0 0.2em 0 0;
+    padding: 0;
+    font-size: 275%
+    }
+p.dropcap .first-word {
+    text-transform: uppercase
+    }
+@page {
+    margin: 0.25em
+    }
+@media screen {
+    body {
+        width: 80%;
+        max-width: 40em;
+        margin: auto
+        }
+    p {
+        margin: 0.5em auto
+        }
+    h1, .page-break {
+        margin-top: 8em
+        }
+    .page-break-after {
+        margin-bottom: 8em
+        }
+    }
+@media all {
+    /* was @media handheld */
+    pre, .pagenum {
+        display: none
+        }
+    h1, .page-break {
+        page-break-before: always
+        }
+    .page-break-after {
+        page-break-after: always
+        }
+    }
+@media all {
+    /* was @media handheld */
+    p {
+        margin-top: 0;
+        margin-bottom: 0
+        }
+    body {
+        margin: 0;
+        padding: 0;
+        width: 95%
+        }
+    .gesperrt {
+        letter-spacing: 0;
+        margin-right: 0
+        }
+    }
+/**/

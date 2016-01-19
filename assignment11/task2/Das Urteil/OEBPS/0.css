@@ -1,0 +1,115 @@
+/**/
+p {
+    text-align: justify;
+    text-indent: 1.5em
+    }
+p.center, p.drop-cap, #advertisements p {
+    text-indent: 0
+    }
+h1 {
+    text-align: center;
+    clear: both;
+    font-size: x-large;
+    font-weight: normal;
+    margin: 1em auto;
+    letter-spacing: 0.2em;
+    padding-left: 0.2em
+    }
+.gesperrt {
+    letter-spacing: 0.2em;
+    margin-right: -0.2em
+    }
+em.gesperrt {
+    font-weight: normal;
+    font-style: normal
+    }
+.center {
+    text-align: center
+    }
+.figcenter {
+    margin: 2.5em auto;
+    text-align: center
+    }
+a[title].pagenum:after {
+    content: attr(title);
+    border: 1px solid silver;
+    display: inline;
+    font-size: x-small;
+    text-align: right;
+    color: #808080;
+    background-color: inherit;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    text-decoration: none;
+    text-indent: 0;
+    letter-spacing: 0
+    }
+.drop-cap:first-letter {
+    margin: -0.1em 0.1em -0.1em 0;
+    font-size: 3.5em;
+    line-height: 1em;
+    overflow: visible
+    }
+.drop-cap .first-word {
+    text-transform: uppercase
+    }
+#advertisements {
+    margin: 8em auto 4em auto
+    }
+#advertisements p {
+    line-height: 1.4em
+    }
+#advertisements .prices {
+    margin-left: 3em
+    }
+@page {
+    margin: 0.25em
+    }
+@media screen {
+    body {
+        width: 80%;
+        max-width: 40em;
+        margin: 120px auto
+        }
+    p {
+        margin: 0.75em auto
+        }
+    .page-break {
+        margin-top: 8em
+        }
+    #advertisements {
+        max-width: 20em
+        }
+    }
+@media all {
+    /* was @media handheld */
+    p {
+        margin: 0
+        }
+    .pagenum {
+        display: none
+        }
+    h1, .page-break, #advertisements {
+        page-break-before: always
+        }
+    .page-break-after {
+        page-break-after: always
+        }
+    }
+@media all {
+    /* was @media handheld */
+    body {
+        margin: 0;
+        padding: 0;
+        width: 95%
+        }
+    .gesperrt {
+        letter-spacing: 0;
+        margin-right: 0
+        }
+    em.gesperrt {
+        font-style: italic
+        }
+    }
+/**/

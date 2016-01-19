@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:opf="http://www.idpf.org/2007/opf" xmlns="http://www.idpf.org/2007/opf" unique-identifier="id" version="2.0">
+  <metadata>
+    <dc:rights>Public domain in the USA.</dc:rights>
+    <dc:identifier id="id" opf:scheme="URI">http://www.gutenberg.org/ebooks/21593</dc:identifier>
+    <dc:creator opf:file-as="Kafka, Franz">Franz Kafka</dc:creator>
+    <dc:title>Das Urteil: Eine Geschichte</dc:title>
+    <dc:language xsi:type="dcterms:RFC4646">de</dc:language>
+    <dc:subject>Fathers and sons -- Fiction</dc:subject>
+    <dc:subject>Conflict of generations -- Fiction</dc:subject>
+    <dc:date opf:event="publication">2007-05-24</dc:date>
+    <dc:date opf:event="conversion">2016-01-11T09:57:55.971545+00:00</dc:date>
+    <dc:source>http://www.gutenberg.org/files/21593/21593-h/21593-h.htm</dc:source>
+    <meta name="cover" content="item1"/>
+  </metadata>
+  <manifest>
+    <!--Image: 341 x 600 size=40803 -->
+    <item id="item1" media-type="image/jpeg" href="@public@vhost@g@gutenberg@html@files@21593@21593-h@images@title-page.jpg"/>
+    <!--Image: 100 x 99 size=3921 -->
+    <item id="item2" media-type="image/png" href="@public@vhost@g@gutenberg@html@files@21593@21593-h@images@emblem.png"/>
+    <item id="item3" media-type="text/css" href="pgepub.css"/>
+    <item id="item4" media-type="text/css" href="0.css"/>
+    <item id="item5" media-type="text/css" href="1.css"/>
+    <!--Chunk: size=56762-->
+    <item id="item6" media-type="application/xhtml+xml" href="@public@vhost@g@gutenberg@html@files@21593@21593-h@21593-h-0.htm.html"/>
+    <item id="ncx" media-type="application/x-dtbncx+xml" href="toc.ncx"/>
+    <item id="coverpage-wrapper" media-type="application/xhtml+xml" href="wrap0000.html"/>
+  </manifest>
+  <spine toc="ncx">
+    <itemref linear="no" idref="coverpage-wrapper"/>
+    <itemref linear="yes" idref="item6"/>
+  </spine>
+  <guide>
+    <reference type="cover" href="wrap0000.html" title="Cover"/>
+  </guide>
+</package>

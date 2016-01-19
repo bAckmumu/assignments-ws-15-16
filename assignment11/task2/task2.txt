@@ -1,0 +1,10 @@
+
+Which files contain essence?
+	@public@vhost@g@gutenberg@html@files@21593@21593-h@21593-h-0.htm
+
+Which files contain meta-data?
+	content.opf
+	toc.ncx
+
+In OEBPF/content.opf you see a lot of XML tags that start with dc: – what is this?
+	This are tags defined by the Dublin Core standerd.
