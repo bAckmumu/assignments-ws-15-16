@@ -1,0 +1,18 @@
+Read the Article: http://www.theverge.com/2015/1/27/7926001/youtube-drops-flash-for-html5-video-default
+
+Briefly answer the following questions:
+
+a) What are the reasons for which YouTube made the switch to HTML5?
+The missing Flash support in smart Phones (especially the iPhone), smart TVs and other streaming devices. Also HTML5 adoption of ABR.
+
+b) Why does Adaptive Bitrate (ABR) reduce buffering?
+It allows to chance the resolution to adopt on the viewers network quality. 
+
+c) Why is reducing buffering desirable
+Nobody wants to wait a longtime before the video starts.
+
+d) What does “heavily congested networks” mean?
+Networks with low bandwidth or chancing bandwidth.
+
+e) What does this article have to do with DASH?
+DASH and the described YouTube HTM5 streaming are more or less the same technique.
