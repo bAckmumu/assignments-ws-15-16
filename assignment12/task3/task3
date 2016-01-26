@@ -1,0 +1,6 @@
+Task3: Tell us what you think about Polymer
+
+Polymer gefällt mir recht gut, man kann damit recht schnell eine Web app schreiben. 
+Die Dokumentation ist leider nicht so gut, z.B.: https://elements.polymer-project.org/elements/paper-tabs, da sind nur zwei Codeschnipsel und wie man das Verhalten, das unter Demo gezeigt wird erreicht ist nicht erklärt (Tabs in Toolbar).
+
+Ich bin am Überlegen ob ich es zusammen mit node.js für meinen Raspberry Pi Podcastplayer rewrite verwenden soll.

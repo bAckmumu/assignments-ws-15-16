@@ -1,3 +1,5 @@
+Task 1: HTML5, DASH
+
 Read the Article: http://www.theverge.com/2015/1/27/7926001/youtube-drops-flash-for-html5-video-default
 
 Briefly answer the following questions:
